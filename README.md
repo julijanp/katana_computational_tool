@@ -1,4 +1,4 @@
-# Water activation activity modeling
+# KATANA computational tool
 
 Using Python to predict the activity inside the measurement snail in the KATANA water activation experiment. 
 Reaction rates in irradiation volume calculated with MCNP.
