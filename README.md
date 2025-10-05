@@ -17,12 +17,22 @@ $R = C \int \Phi(E)\,\sigma(E)\,N\,dE$.
 
 Here, $\Phi(E)$ denotes the neutron flux, $\sigma(E)$ the microscopic cross section, and $N$ the atomic number density of the parent nuclide, calculated using the JSI TRIGA MCNP model [1]. The transport of each volume element proceeds in discrete steps determined by the volumetric flow rate.
 
-![KATANA computational tool schematica](figures/25_10_02_katana_tool_scheme.png)
+![KATANA computational tool scheme](figures/25_10_02_katana_tool_scheme.png)
 
 The computational tool is implemented in the Python programming language and can model a wide range of irradiation scenarios and loop geometries. Two main loop configurations are available: the short loop, optimized for radionuclides with short half-lives (N-16 and N-17), and the decay loop, which enables measurements of longer-lived activation products (O-19). In addition, the tool allows simulation of both flow transients and reactor power transients, providing flexibility for benchmarking experiments and validation studies under real experimental conditions.
 
 
 Uncertainties in the KATANA computational tool are evaluated by combining contributions from nuclear data uncertainties, statistical uncertainties from Monte Carlo transport calculations, and the averaging of reaction rates across the irradiation volume. 
+
+## KATANA water activation facility
+
+The KATANA water activation facility was commissioned in the "Jožef Stefan" Institute TRIGA (JSI TRIGA) research reactor hall in late 2023. In 2024 and 2025, five intensive experimental campaigns were conducted at the KATANA facility as part of the EUROFusion work package Preparation of ITER Operation (WPPrIO), aimed at addressing the key challenges of water activation in future fusion reactors. More than 20 researchers from eight research groups participated in the campaigns, illustrating the collaborative nature of this ambitious project. Over 26 test days, the JSI TRIGA reactor operated for more than 200 hours and provided the necessary platform for a variety of tests and measurements.
+
+![KATANA water activation facility scheme](figures/25_10_02_katana_tool_scheme.png)
+
+The KATANA water activation facility provides a controlled source of high-energy \ce{\gamma}-rays and neutrons in the range 0.3–1.2 MeV. It was developed to enable experimental investigations of water activation phenomena and is designed for flexibility, allowing applications such as calibration of radiation detectors and dosimeters, shielding studies, validation of simulation tools for fusion cooling systems, and measurements of integral cross sections [1].
+
+The facility comprises a closed water activation loop divided into three main components: the inner section, the outer section, and the control panel. The inner section is installed in the Radial Piercing Port (RPP) of the JSI TRIGA reactor, where neutron interactions generate short-lived radioisotopes in the water. The activated water then circulates through pipes to the outer section, located inside the concrete shielding adjacent to the RPP. This outer section consists of two circuits connected by a three-way valve: a short primary loop and a longer delay loop. For the experiments described in this work, only the primary loop was used, as the radionuclide of interest has a short half-life. The activated water is continuously monitored in the measurement volume before being recirculated into the inner section. The system is operated and controlled remotely from the control panel positioned behind the concrete shielding [1,2,3].
 
 ## References
 
