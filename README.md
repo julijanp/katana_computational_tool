@@ -28,7 +28,7 @@ Uncertainties in the KATANA computational tool are evaluated by combining contri
 
 The KATANA water activation facility was commissioned in the "Jožef Stefan" Institute TRIGA (JSI TRIGA) research reactor hall in late 2023. In 2024 and 2025, five intensive experimental campaigns were conducted at the KATANA facility as part of the EUROFusion work package Preparation of ITER Operation (WPPrIO), aimed at addressing the key challenges of water activation in future fusion reactors. More than 20 researchers from eight research groups participated in the campaigns, illustrating the collaborative nature of this ambitious project. Over 26 test days, the JSI TRIGA reactor operated for more than 200 hours and provided the necessary platform for a variety of tests and measurements.
 
-![KATANA water activation facility scheme](figures/25_10_02_katana_tool_scheme.png)
+![KATANA water activation facility scheme](figures/25_06_19_KATANA_scheme_V1_figure.png)
 
 The KATANA water activation facility provides a controlled source of high-energy \ce{\gamma}-rays and neutrons in the range 0.3–1.2 MeV. It was developed to enable experimental investigations of water activation phenomena and is designed for flexibility, allowing applications such as calibration of radiation detectors and dosimeters, shielding studies, validation of simulation tools for fusion cooling systems, and measurements of integral cross sections [1].
 
