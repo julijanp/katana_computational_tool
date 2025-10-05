@@ -20,6 +20,17 @@ Here, $\Phi(E)$ denotes the neutron flux, $\sigma(E)$ the microscopic cross sect
 ![KATANA computational tool schematica](figures/25_10_02_katana_tool_scheme.png)
 
 - Activity versus time (24_11_15_irradiation_scenario_pulse_model_V1_test.py)
+
+## References
+
+[1] D. Kotnik, J. Peric, D. Govekar, L. Snoj, and I. Lengar. “KATANA - water activation facility at JSI
+TRIGA, Part I: Final design and activity calculations.” Nuclear Engineering and Technology (2024).
+
+[2] D. Kotnik, J. Peric, D. Govekar, L. Snoj, and I. Lengar. “KATANA - water activation facility at JSI
+TRIGA, Part II: First experiments." Nuclear Engineering and Technology (2024).
+
+[3] J. Peric, D. Kotnik, L. Snoj, and V. Radulovi´c. “Neutron emission from water activation: Experiments and modeling under fusion-relevant conditions at the KATANA facility.” Fusion Engineering
+and Design, volume 216, p. 115052 (2025)
   
 
 
