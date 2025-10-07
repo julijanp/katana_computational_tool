@@ -34,6 +34,8 @@ The KATANA water activation facility provides a controlled source of high-energy
 
 The facility comprises a closed water activation loop divided into three main components: the inner section, the outer section, and the control panel. The inner section is installed in the Radial Piercing Port (RPP) of the JSI TRIGA reactor, where neutron interactions generate short-lived radioisotopes in the water. The activated water then circulates through pipes to the outer section, located inside the concrete shielding adjacent to the RPP. This outer section consists of two circuits connected by a three-way valve: a short primary loop and a longer delay loop. For the experiments described in this work, only the primary loop was used, as the radionuclide of interest has a short half-life. The activated water is continuously monitored in the measurement volume before being recirculated into the inner section. The system is operated and controlled remotely from the control panel positioned behind the concrete shielding [1,2,3].
 
+## Validation
+
 ## References
 
 [1] [D. Kotnik, J. Peric, D. Govekar, L. Snoj, and I. Lengar. “KATANA - water activation facility at JSI
