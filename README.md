@@ -49,7 +49,7 @@ TRIGA, Part I: Final design and activity calculations.” Nuclear Engineering an
 [2] [D. Kotnik, J. Peric, D. Govekar, L. Snoj, and I. Lengar. “KATANA - water activation facility at JSI
 TRIGA, Part II: First experiments." Nuclear Engineering and Technology (2024).](https://doi.org/10.1016/j.net.2024.10.052)
 
-[3] [J. Peric, D. Kotnik, L. Snoj, and V. Radulovi´c. “Neutron emission from water activation: Experiments and modeling under fusion-relevant conditions at the KATANA facility.” Fusion Engineering and Design, volume 216, p. 115052 (2025).](https://doi.org/10.1016/j.fusengdes.2025.115052)
+[3] [J. Peric, D. Kotnik, L. Snoj, and V. Radulovič. “Neutron emission from water activation: Experiments and modeling under fusion-relevant conditions at the KATANA facility.” Fusion Engineering and Design, volume 216, p. 115052 (2025).](https://doi.org/10.1016/j.fusengdes.2025.115052)
   
 
 
