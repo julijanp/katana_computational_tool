@@ -36,17 +36,21 @@ The facility comprises a closed water activation loop divided into three main co
 
 ## Validation
 
+### Pump transient scenario
+
 The experiments with neutrons from the decay of $^{17}$ N were conducted on October 3, 2025 with reactor core configuration no. 262, and the reactor operating at full power in steady state. During the experiments, a single $^{3}$ He detector with a CAEN data acquisition system was used, positioned inside the outer measurement volume, as shown in Figure below. The KATANA water activation facility was operated in the primary closed water loop configuration (short loop).
 
 ![KATANA computational tool validation](figures/25_10_25_KATANA_validation_FLW1.png)
 
-The count rate of the $^3$ He detector is calculated from the measured signal spectra by considering the entire spectrum associated with the \ce{^{3}He} (n,p) \ce{^{3}H} reaction and dividing by the measurement time. The KATANA computational tool was used to calculate the $^{17}$ N activity within Snail No. 1. 
+The count rate of the $^3$ He detector is calculated from the measured signal spectra by considering the entire spectrum associated with the $^{3}$ He (n,p) $^{3}$ H reaction and dividing by the measurement time. The KATANA computational tool was used to calculate the $^{17}$ N activity within Snail No. 1. 
 
 The measurements from the experiment and its simulation are shown in Figure above. The upper graph displays the measured count rate from the $^3$ He detector (blue points with error bars) and the corresponding activity predicted by the KATANA computational tool (red line) with its uncertainty band (pink shaded area). The lower graph shows the measured (blue) and computed (red) flow rate evolution during the pump transient. The KATANA operation scenario involved a step increase in flow rate from 0 l/s - 0.5 l/s, followed by a return to 0 l/s after approximately 100 s. The good agreement between measured and simulated responses confirms the capability of the KATANA computational tool to model accurately the dynamic behaviour of activation and decay during transient flow conditions.
 
 The comparison between the measured KATANA neutron response and the computational model shows excellent agreement within the combined experimental and computational uncertainties. The initial transient peak is reproduced with high fidelity, confirming that the model accurately captures the buildup and decay kinetics of $^{17}$ N. After the pump stops, the calculated and measured signals both follow the exponential decay of activated $^{17}$ N atoms precisely. The close correspondence between the measured and modelled decay profiles further confirms that the measured signal originates from $^{17}$ N decay, as its time evolution is fully consistent with the calculated activity of transported $^{17}$ N atoms. 
 
 These results demonstrate that the flow field in the activation loop can be effectively represented by assuming a uniform flow profile in the computational model, as potential non-uniformities in velocity distribution or mixing have a negligible impact on the predicted activity transport and decay behaviour.
+
+### Reactor transient scenario
 
 ## References
 
