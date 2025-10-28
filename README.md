@@ -36,7 +36,7 @@ The facility comprises a closed water activation loop divided into three main co
 
 ## Validation
 
-The experiments with neutrons from the decay of $^{17}$N were conducted on October 3, 2025 with reactor core configuration no. 262, and the reactor operating at full power in steady state. During the experiments, a single $^{3}$ He detector with a CAEN data acquisition system was used, positioned inside the outer measurement volume, as shown in Figure below. The KATANA water activation facility was operated in the primary closed water loop configuration (short loop).
+The experiments with neutrons from the decay of $^{17}$ N were conducted on October 3, 2025 with reactor core configuration no. 262, and the reactor operating at full power in steady state. During the experiments, a single $^{3}$ He detector with a CAEN data acquisition system was used, positioned inside the outer measurement volume, as shown in Figure below. The KATANA water activation facility was operated in the primary closed water loop configuration (short loop).
 
 ![KATANA computational tool validation](figures/25_10_25_KATANA_validation_FLW1.png)
 
