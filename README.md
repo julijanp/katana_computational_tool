@@ -52,6 +52,19 @@ These results demonstrate that the flow field in the activation loop can be effe
 
 ### Reactor transient scenario
 
+## Setup
+Project is created with:
+* Python 3.8
+* Pandas
+* NumPy
+* Matplotlib
+* Math
+
+To run this project, copy the repository to your computer and start it with:
+```
+$ python3 katana_computational_tool.py
+```
+
 ## References
 
 [1] [D. Kotnik, J. Peric, D. Govekar, L. Snoj, and I. Lengar. “KATANA - water activation facility at JSI
