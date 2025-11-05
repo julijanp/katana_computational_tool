@@ -6,9 +6,11 @@
 #pulse scenario: V4 25.10.2024
 #steady state scenario: V1 25.10.2024
 #ToDo:
-# -steady state irradiation scenario - real reactor power (not that important)
-# 
-# -flow rate scenario
+# - steady state irradiation scenario - real reactor power (not that important)
+# - input file for easier run of the program
+#     - file
+#     - file parser and irradiation scenario constructor
+# - flow rate scenario
 #   For now only one pump start and stop is possible
 #   -multiple pump start and stop
 #   -flow rate real data (not that easy :/)
