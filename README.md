@@ -1,5 +1,15 @@
 # KATANA computational tool
 
+## Table of contents
+* [General info](#general-info)
+* [KATANA water activation facility](#katana-water-activation-facility)
+* [Validation](#validation)
+* [Setup](#setup)
+
+
+
+## General info
+
 Using Python to predict the activity inside the measurement snail in the KATANA water activation experiment. 
 Reaction rates in irradiation volume calculated with MCNP.
 
