@@ -74,6 +74,117 @@ To run this project, copy the repository to your computer and start it with:
 ```
 $ python3 katana_computational_tool.py
 ```
+### KATANA Configuration Guide (`config.txt`)
+The simulation is controlled via a plain text file:
+
+```
+config.txt
+```
+
+#### File Format
+
+Each line follows a simple key-value structure:
+
+```
+parameter_name = value
+```
+
+#### Rules
+- Lines starting with `#` are comments
+- Empty lines are ignored
+- Lists are comma-separated
+
+---
+
+#### Example Configuration
+
+```
+# ==============================
+# KATANA CONFIGURATION FILE
+# ==============================
+
+# --- GENERAL ---
+irradiation_scenario = steady
+Nmoves = 9000
+voxel_volume = 21.65
+
+# --- FLOW ---
+flow_rate_ramp = 670,500,400,300,200,100
+
+# --- COMMON ---
+pump_start = 1000
+pump_stop = 15256
+
+# --- STEADY MODE ---
+reactor_power = 250
+
+# --- PULSE MODE ---
+ID_TRIGA = 774
+freq_TRIGA = 20000
+MA2_TRIGA = 150
+```
+
+---
+
+#### Parameters
+
+##### General Parameters
+
+| Parameter | Type | Description |
+|----------|------|------------|
+| `irradiation_scenario` | string | `steady` or `pulse` |
+| `Nmoves` | int | Number of simulation time steps |
+| `voxel_volume` | float | Volume of one voxel (cm³) |
+
+---
+
+##### Flow Parameters
+
+| Parameter | Type | Description |
+|----------|------|------------|
+| `flow_rate_ramp` | int or list | Flow rate(s) in cm³/s |
+---
+
+##### Common Parameters
+
+| Parameter | Type | Description |
+|----------|------|------------|
+| `pump_start` | int | Time step when flow starts |
+| `pump_stop` | int | Time step when flow stops |
+
+---
+
+##### Steady-State Mode
+
+Used when:
+
+```
+irradiation_scenario = steady
+```
+| Parameter | Type | Description |
+|----------|------|------------|
+| `reactor_power` | float | Reactor power (kW) |
+---
+
+##### Pulse Mode
+Used when:
+
+```
+irradiation_scenario = pulse
+```
+| Parameter | Type | Description |
+|----------|------|------------|
+| `ID_TRIGA` | int or list | TRIGA pulse ID(s) |
+| `fig` | 0 or 1 | Gif generation |
+| `MA2_TRIGA` | int | Moving average window |
+---
+#####  Required Input Files
+
+The simulation also depends on external data files:
+- `WACT_RR.xlsx` → Reaction rate data
+- `pulse<ID>.txt` → TRIGA pulse data (pulse mode only)
+Ensure these files are located in the same directory as the script.
+---
 
 ## References
 

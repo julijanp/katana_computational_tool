@@ -521,8 +521,208 @@ def combine_gifs_vertically(gif1_path, gif2_path, output_path="combined.gif", fp
 
     print(f"✅ Combined GIF saved to: {output_path} at {fps} FPS ({duration_ms}ms/frame)")
 
+###### configuration and parameters #####
+def create_default_config(filename="config.txt"):
+    default_config = """# ==============================
+# KATANA CONFIGURATION FILE
+# ==============================
+
+# --- GENERAL ---
+irradiation_scenario = steady
+Nmoves = 9000
+voxel_volume = 21.65
+
+# --- FLOW ---
+flow_rate_ramp = 670,500,200
+
+# --- COMMON ---
+pump_start = 0
+pump_stop = 15256
+
+# --- STEADY MODE ---
+reactor_power = 250
+
+# --- PULSE MODE ---
+ID_TRIGA = 774,774,774
+gif = 0
+
+"""
+    with open(filename, "w") as f:
+        f.write(default_config)
+
+    print(f"\nDefault config file '{filename}' has been created.")
+    print("Please edit it and run the script again.\n")
+
+def read_config(filename):
+    config = {}
+
+    try:
+        with open(filename, "r") as f:
+            for line_number, line in enumerate(f, start=1):
+                line = line.strip()
+
+                # skip comments and empty lines
+                if not line or line.startswith("#"):
+                    continue
+
+                if "=" not in line:
+                    raise ValueError(
+                        f"Invalid line {line_number} in {filename}: '{line}'. "
+                        "Expected format: key = value"
+                    )
+
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip()
+
+                if not key:
+                    raise ValueError(
+                        f"Invalid line {line_number} in {filename}: empty key."
+                    )
+
+                if not value:
+                    raise ValueError(
+                        f"Invalid line {line_number} in {filename}: empty value for '{key}'."
+                    )
+
+                # parse lists
+                if "," in value:
+                    parsed_list = []
+                    for v in value.split(","):
+                        v = v.strip()
+                        if not v:
+                            raise ValueError(
+                                f"Invalid line {line_number} in {filename}: empty item in list for '{key}'."
+                            )
+                        parsed_list.append(parse_value(v))
+                    config[key] = parsed_list
+                else:
+                    config[key] = parse_value(value)
+
+    except FileNotFoundError:
+        raise FileNotFoundError(
+            f"Config file '{filename}' was not found."
+        )
+
+    return config
+
+
+def parse_value(value):
+    lower_value = value.lower()
+
+    if lower_value in ["true", "false"]:
+        return lower_value == "true"
+
+    try:
+        if "." in value:
+            return float(value)
+        return int(value)
+    except ValueError:
+        return value
+
+
+def validate_config(config):
+    required_common = [
+        "irradiation_scenario",
+        "Nmoves",
+        "flow_rate_ramp",
+        "pump_start",
+        "pump_stop",
+    ]
+
+    required_steady = [
+        "reactor_power",
+    ]
+
+    required_pulse = [
+        "ID_TRIGA",
+        "gif",
+    ]
+
+    missing = [key for key in required_common if key not in config]
+    if missing:
+        raise ValueError(
+            "Missing required common parameter(s): " + ", ".join(missing)
+        )
+
+    scenario = str(config["irradiation_scenario"]).strip().lower()
+    if scenario not in ["steady", "pulse"]:
+        raise ValueError(
+            "Parameter 'irradiation_scenario' must be either 'steady' or 'pulse'."
+        )
+
+    if scenario == "steady":
+        missing = [key for key in required_steady if key not in config]
+        if missing:
+            raise ValueError(
+                "Missing required steady-state parameter(s): " + ", ".join(missing)
+            )
+
+    if scenario == "pulse":
+        missing = [key for key in required_pulse if key not in config]
+        if missing:
+            raise ValueError(
+                "Missing required pulse parameter(s): " + ", ".join(missing)
+            )
+
+        
+
+    # numeric checks
+    if config["Nmoves"] <= 0:
+        raise ValueError("'Nmoves' must be > 0.")
+
+    if config["pump_start"] < 0:
+        raise ValueError("'pump_start' must be >= 0.")
+
+    if config["pump_stop"] <= config["pump_start"]:
+        raise ValueError("'pump_stop' must be greater than 'pump_start'.")
+    flow = config["flow_rate_ramp"]
+# allow single value
+    if isinstance(flow, (int, float)):
+        config["flow_rate_ramp"] = [flow]
+
+# check list
+    elif isinstance(flow, list):
+        if len(flow) == 0:
+            raise ValueError("'flow_rate_ramp' must not be empty.")
+    else:
+        raise ValueError("'flow_rate_ramp' must be a number or list.")
+
+
+    if any(f <= 0 for f in config["flow_rate_ramp"]):
+        raise ValueError("All values in 'flow_rate_ramp' must be > 0.")
+
+    if scenario == "steady" and config["reactor_power"] <= 0:
+        raise ValueError("'reactor_power' must be > 0.")
+    
+def print_scenario(config):
+    print("\n" + "="*50)
+    print("KATANA SIMULATION SCENARIO")
+    print("="*50)
+
+    print(f"Scenario type       : {config['irradiation_scenario']}")
+    print(f"Nmoves              : {config['Nmoves']}")
+    print(f"Voxel volume [cm^3] : {config['voxel_volume']}")
+    print(f"Flow rates [cm^3/s] : {config['flow_rate_ramp']}")
+    print(f"Pump start (step)   : {config['pump_start']}")
+    print(f"Pump stop  (step)   : {config['pump_stop']}")
+
+    scenario = config["irradiation_scenario"].lower()
+
+    if scenario == "steady":
+        print("\n--- STEADY STATE ---")
+        print(f"Reactor power [kW]  : {config['reactor_power']}")
+
+    elif scenario == "pulse":
+        print("\n--- PULSE ---")
+        print(f"Pulse IDs           : {config['ID_TRIGA']}")
+        print(f"Gif generation      : {config['gif']}")
+
+
+    print("="*50 + "\n")
+
 ##################################################
-#
+
 output_file_destination = "output_files/" # Replace with desired destination
 # Check if the directory exists
 if not os.path.exists(output_file_destination):
@@ -535,27 +735,46 @@ else:
 # Define parameters
 # Main loop parameters outside the function with index
 ###### loop parameters #####
-flow_rate_ramp = [670,500,400,300,200,100]  # Example flow rates
-Nmoves = 9000 #number of deltaT 4 1538 15380
+config_file = "config.txt"
+
+if not os.path.exists(config_file):
+    create_default_config(config_file)
+    exit(0)
+
+try:
+    config = read_config(config_file)
+    validate_config(config)
+    print_scenario(config)
+except Exception as e:
+    print(f"Configuration error: {e}")
+    exit(1)
+
+flow_rate_ramp = config["flow_rate_ramp"]
+Nmoves = config["Nmoves"]
+irradiation_scenario = config["irradiation_scenario"]
+pump_start = config["pump_start"]
+pump_stop = config["pump_stop"]
+
 voxel_volume = 21.65  # cm^3
 output_file_prefix = "output"  # Replace with desired prefix
 # irradiation scenario
-irradiation_scenario = "steady" #pulse or steady
 
 if irradiation_scenario == "steady":
-    reactor_power = 250 #kW steady state power
-    pump_start = 1000 #number of deltaT befor start of the pump pump_start<Nmoves usualy
-    pump_stop = 15256 #number of deltaT after start of the pump
+    reactor_power = config["reactor_power"]
+    #reactor_power = 250 #kW steady state power
+    #pump_start = 1000 #number of deltaT befor start of the pump pump_start<Nmoves usualy
+    #pump_stop = 15256 #number of deltaT after start of the pump
     print("Steady state irradiation scenario")
     irradiation_scenario_data, irradiation_power_data = steady_state_irradiation_scenario(flow_rate_ramp[0], Nmoves, reactor_power, voxel_volume)
     #print(irradiation_scenario_data)
 
 if irradiation_scenario == "pulse":
-    ID_TRIGA = [774,774,774] #JSI TRIGA pulse ID
+    ID_TRIGA = config["ID_TRIGA"]
+    #ID_TRIGA = [774,774,774] #JSI TRIGA pulse ID
     freq_TRIGA = 20000 #Hz DAQ frequency JSI Pulse recorder
     MA2_TRIGA = 150 #moving average window
-    pump_start = 1000 #number of deltaT befor start of the pump pump_start<Nmoves usualy
-    pump_stop = 15256 #number of deltaT after start of the pump
+    #pump_start = 1000 #number of deltaT befor start of the pump pump_start<Nmoves usualy
+    #pump_stop = 15256 #number of deltaT after start of the pump
     print("Pulse irradiation scenario")
     for index, flow_rate in enumerate(flow_rate_ramp):
         irradiation_scenario_data, irradiation_power_data = process_single_flow_rate_irradiation_scenario(flow_rate, Nmoves, ID_TRIGA[index], freq_TRIGA, MA2_TRIGA, voxel_volume, output_file_prefix, index)
@@ -696,7 +915,7 @@ print(f"time ramp: {time_ramp_TEST}")
 ##### DATA VISUALIZATION #####
 ### GIF: Activity evolution over time ###
 
-gif =0 #whether to create a GIF or not
+gif = config["gif"]  #whether to create a GIF or not
 if gif == 1:
     create_activity_gif_2(
         irradiation_power="TRIGA Pulse",
@@ -782,7 +1001,7 @@ if irradiation_scenario == "pulse":
     plt.legend()
     plt.grid(True, linestyle='--')
     plt.tight_layout()
-    plt.savefig(+output_file_destination+"N17_activity_pulse_ID_"+str(ID_TRIGA[1])+".png",dpi=150)
+    plt.savefig(output_file_destination+"N17_activity_pulse_ID_"+str(ID_TRIGA[1])+".png",dpi=150)
 
     plt.figure(8)
     for i in range(len(flow_rate_ramp)):
