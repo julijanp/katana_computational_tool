@@ -1,0 +1,22 @@
+# ==============================
+# KATANA CONFIGURATION FILE
+# ==============================
+
+# --- GENERAL ---
+irradiation_scenario = steady
+Nmoves = 9000
+voxel_volume = 21.65
+
+# --- FLOW ---
+flow_rate_ramp = 670,500,200
+
+# --- COMMON ---
+pump_start = 0
+pump_stop = 15256
+
+# --- STEADY MODE ---
+reactor_power = 250
+
+# --- PULSE MODE ---
+ID_TRIGA = 774,774,774
+gif = 0
